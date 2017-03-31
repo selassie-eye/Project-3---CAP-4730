@@ -68,13 +68,15 @@ public:
     void                        InitManipMode                               (void);
     void                        InitManipGeometryMode                       (void);
     RenderMode                  GetRenderMode                               (void);
-    void                        SetRenderMode                               (RenderMode mode);                                  
+    void                        SetRenderMode                               (RenderMode mode);
 
     void                        Translate                                   (STVector3 prevMousePos, STVector3 curMousePos);
     void                        Rotate                                      (STVector3 prevMousePos, STVector3 curMousePos);
     void                        Spin                                        (float QMat1[4], float QMat2[4], float QMat3[4]);
 
     void                        PropogateTransforms                         (SceneNode *pNode);
+    void                        PropogateTransforms                         (TransformNode *pNode); // Overloading for Project 3
+
 
     STVector3                   GetLightPosition                            (void);
 
@@ -100,9 +102,9 @@ public:
 
     SceneNode                   *m_pTree;                           // root node of the scene graph
 	float                       m_flagx, m_flagy, m_flagz;          // updated by Scene::Translate 0 tracks center of manipulator for Ray hit tests for manipulator selection
-	STMatrix4                   m_rotation, m_trans;                // m_rotation is a rotation matrix updated by Scene::Rotate and 
+	STMatrix4                   m_rotation, m_trans;                // m_rotation is a rotation matrix updated by Scene::Rotate and
                                                                     // tracks a small change in rotation about an axis
-                                                                    // m_trans is a translation matrix updated by Scene::Translate and 
+                                                                    // m_trans is a translation matrix updated by Scene::Translate and
                                                                     // tracks a small change in translation  along an axis
 
     // lights
@@ -116,7 +118,7 @@ private:
 
     // lights
     Light *m_pLight;
-    void                        InitLights                                  (void);       
+    void                        InitLights                                  (void);
 
 
 
@@ -151,7 +153,7 @@ private:
     float m_translatey, m_prey;
     float m_translatez, m_prez;
     float m_rotatex, m_rotatey, m_rotatez;
-    
+
 
     ManipMotionType m_last;
     bool IsRotation(ManipMotionType motion);
@@ -164,7 +166,7 @@ private:
     // used for manipulator geometry drawing
     STVector3 gblXVert;
     STVector3 gblYVert;
-    float Ng2; 
+    float Ng2;
     float screenScale; // used to compute vpscreenfactor
     float vpscreenfactor; // used as a scaler (in screen space) for advancing translation and rotations movements
     void                    DrawQuadrant                            (STVector3 origin, float size, bool bSelected, STVector3 axisU, STVector3 axisV);
@@ -199,6 +201,3 @@ private:
 
 
 #endif //__SCENE_H__
-
-
-
