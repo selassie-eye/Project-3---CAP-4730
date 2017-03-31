@@ -41,7 +41,7 @@ Scene::Scene(void)
       m_pCamera(NULL),
       m_renderMode(LAMBERTIAN),
       m_bHasManipulator (false),
-      m_manipMotionType(MANIP_NONE), 
+      m_manipMotionType(MANIP_NONE),
       m_activeManipGeom(AXIS_NONE),
       m_translatex(0),
       m_translatey(0),
@@ -70,7 +70,7 @@ Scene::Scene(void)
 
     // init camera
     m_pCamera = new Camera();
-   
+
     // Initialize the scene graph root
     m_pTree = new SceneNode("root", NULL);
     m_pTree->SetTransform(IdentityMatrix());
@@ -98,7 +98,7 @@ Scene::~Scene()
 
     //------------------------------------------------------------------------------------
     // TO DO: Proj3_sceneManip
-    // clean  up 
+    // clean  up
     // 1. delete all the scene nodes
     // 2. empty the GeometryList (or whatever scene structure you use)
     //-------------------------------------------------------------------------------------
@@ -247,7 +247,7 @@ SurfaceNode *Scene::AddSurface(Surface *pSurfacein, SceneNode *pNode)
 //------------------------------------------------------------------------------------
 // TO DO: Proj3_scenemanip
 // adds a  triangle mesh to the scene
-// Input: STTriangleMesh 
+// Input: STTriangleMesh
 TriangleMeshNode *Scene::AddTriangleMesh(STTriangleMesh *pTrianglein, SceneNode *pNode)
 {
 
@@ -288,16 +288,16 @@ void Scene::GetBBox(STPoint3 *gMassCenter, std::pair<STPoint3,STPoint3>  *gBound
     }
     *gMassCenter = STTriangleMesh::GetMassCenter(gTriangleMeshes);
     *gBoundingBox=STTriangleMesh::GetBoundingBox(gTriangleMeshes);
-    
+
 
     // transform bbox to model space
     STMatrix4 worldtransform = *(m_geometryList[0]->GetWorldT());
     STVector4 gmasscentervec4;
     STPoint3toSTVector4w1(*gMassCenter, &gmasscentervec4);
-    STVector4 gmasscentervec4_new; 
+    STVector4 gmasscentervec4_new;
     gmasscentervec4.Transform(worldtransform);
-    STVector4 bboxmin; 
-    STVector4 bboxmax; 
+    STVector4 bboxmin;
+    STVector4 bboxmax;
     STPoint3toSTVector4w1(gBoundingBox->first, &bboxmin);
     STPoint3toSTVector4w1(gBoundingBox->second, &bboxmax);
     bboxmin.Transform(worldtransform);
@@ -357,16 +357,16 @@ void Scene::Clear(void)
 // TO DO: Proj3_sceneManip
 // Update this code to draw the object correctly
 // Note that - tree traversal and transform propogation has already happened when this function is called.
-// This means that PropogateTransforms(m_pTree) has updated each scene node so that it has it's world transform 
+// This means that PropogateTransforms(m_pTree) has updated each scene node so that it has it's world transform
 // and normal transform already updated and stored.
 // To complete this function:
 // 1. Adjust this function to call draw on each geometry node in your new tree structure.
 //    Currently it loops through the list m_geometryList and draws triangle meshes. If you are still managing this list
 //    no change is necessary for this item.
-// 2. Make sure that normals are actually transformed correctly before each draw call to void STTriangleMesh::Draw(bool smooth) const. 
+// 2. Make sure that normals are actually transformed correctly before each draw call to void STTriangleMesh::Draw(bool smooth) const.
 //     There are many options for this: For example
 //   - copy the TrangleMesh::Draw function in TrangleMesh.cpp (don't forget to declare the new function as public in the TriangleMesh.h)
-//     but add the new input worldIT. Send in the worldIT of the current mesh. At every call to glNormal3f in the function 
+//     but add the new input worldIT. Send in the worldIT of the current mesh. At every call to glNormal3f in the function
 //     TTriangleMesh::Draw(bool smooth, STMatrix4 worldIT) const, adjust the code to transform the normals by worldIT first.
 //------------------------------------------------------------------------------------
 void Scene::Draw(void)
@@ -374,7 +374,7 @@ void Scene::Draw(void)
     // for each geometry node in the tree
     for (int i = 0; i < (int)m_geometryList.size(); ++i) {
 
-        // world transformation of this object and world normal transformation 
+        // world transformation of this object and world normal transformation
         STMatrix4 *myworldT;
         STMatrix4 *myworldIT;
         myworldT =  m_geometryList[i]->GetWorldT();
@@ -391,10 +391,10 @@ void Scene::Draw(void)
 
         // now draw the scene and the manipulators if they are in the scene
         m_geometryList[i]->GetElement()->Draw(true);
-        if((GetRenderMode() == NAVIGATION) 
+        if((GetRenderMode() == NAVIGATION)
             && ((CurrentManipMode() == LOCAL)
                 || (CurrentManipMode() == PARENT))
-            && (HasManipulator())) { 
+            && (HasManipulator())) {
                 DrawManipulator();
         }
         // pop the matrix off the stack
@@ -511,25 +511,25 @@ void Scene::Translate(STVector3 prevMousePos, STVector3 curMousePos)
     // 1. Check which manipulation mode the program is in by calling - CurrentManipMode() which returns the mode in the front of m_modeQueue
     // 2. For LOCAL mode - transform in the object's coordinate system, M = M * T
     // 3. For PARENT mode - transform in relation to the object's parent, M = T * M
-    // 4. Formulate the transform along the axis by delta related to 
+    // 4. Formulate the transform along the axis by delta related to
     //    the product of the difference in mouse positions and a constant term
-    // 5. Make your manipulator move with the mouse position. 
+    // 5. Make your manipulator move with the mouse position.
     //    The point you press on should remain under the mouse as it moves.
     //    Scene::DrawManipulator handles this by setting the manipulator's transform.
     //    The manipulator Scene::DrawManipulator is called during the Scene::Draw
     //    function with the current modelview matrix affecting the manipulator geometry's position.
-    // 6. It is up to you how you interpret the changes in mouse position. For example you could - 
-    //    Form a ray corresponding to the mouse click and 
+    // 6. It is up to you how you interpret the changes in mouse position. For example you could -
+    //    Form a ray corresponding to the mouse click and
     //    the line corresponding to the manipulation axis in world space and
     //    Compute the t intervals along the axis that correspond to the mouse movement.
     //    OR you could simply find some mapping that uses the change in the mouse positions
     //    to increment the translation in x, y and z (depending on the axis) in a smooth way.
     // 7. Make sure the private member m_trans is updated with T, the change in translation
-    // 8. Make sure the private members m_translatex, m_translatey and m_translates are updated with 
+    // 8. Make sure the private members m_translatex, m_translatey and m_translates are updated with
     //    the scaled change in x, y, and z
     //-----------------------------------------------------------------------------------------
-    
-    
+
+
     // deterine the axis of translation
     ManipMotionType motion = CurrentManipMotion();
 
@@ -549,7 +549,7 @@ void Scene::Translate(STVector3 prevMousePos, STVector3 curMousePos)
     // tracks the center of the translation manipulator
     // geometry for ray-hit tests
     // used for selecting the translation manipulator
-    m_flagx = m_prex + mode[0] * m_translatex; 
+    m_flagx = m_prex + mode[0] * m_translatex;
     m_flagy = m_prey + mode[1] * m_translatey;
     m_flagz = m_prez + mode[2] * m_translatez;
 
@@ -575,15 +575,15 @@ void Scene::Rotate(STVector3 prevMousePos, STVector3 curMousePos)
     // 1. Check which manipulation mode the program is in by calling - CurrentManipMode() which returns the mode in the front of m_modeQueue
     // 2. For LOCAL mode - transform in the object's coordinate system, M = M * T
     // 3. For PARENT mode - transform in relation to the object's parent, M = T * M
-    // 4. Formulate the transform along the axis by delta related to 
+    // 4. Formulate the transform along the axis by delta related to
     //    the product of the difference in mouse positions and a constant term
-    // 5. Make your manipulator move with the mouse position. 
+    // 5. Make your manipulator move with the mouse position.
     //    The point you press on should remain under the mouse as it moves.
     //    Scene::DrawManipulator handles this by setting the manipulator's transform.
     //    The manipulator Scene::DrawManipulator is called during the Scene::Draw
     //    function with the current modelview matrix affecting the manipulator geometry's position.
-    // 6. It is up to you how you interpret the changes in mouse position. For example you could - 
-    //    Form a ray corresponding to the mouse click and 
+    // 6. It is up to you how you interpret the changes in mouse position. For example you could -
+    //    Form a ray corresponding to the mouse click and
     //    the line corresponding to the manipulation axis in world space.
     //    and compute the t intervals along the axis that correspond to the mouse movement.
     //    OR you could simply find some mapping the uses the change in the mouse positions
@@ -633,24 +633,24 @@ void Scene::PropogateTransforms(SceneNode *pNode)
     // Re-implement this function to traverse your scene graph structure
     // This function is called by Scene::Translate and Scene::Rotate
     // Basically, it updates the transformation in each scene node everytime the object moves.
-    // You will traverse the scene graph here and make sure each 
-    // node has the correct world transformation (and normal transformation). It is up to you how you build 
+    // You will traverse the scene graph here and make sure each
+    // node has the correct world transformation (and normal transformation). It is up to you how you build
     // your scene graph structure using the scenenode classes provided.
     // Currently all geometry nodes are stored in m_geometryList as they are added. This is
     // very inefficient for traversal. You must take advantage of a scene graph tree structure to create
-    // a recursive function that traverses a given scene tree, and propagates group 
+    // a recursive function that traverses a given scene tree, and propagates group
     // transformations to child nodes. You make have to update how nodes are inserted.
-    // 
+    //
     // Consider A - the Object's parent's world transform
     //          B - the Object's local transform
     // 1. Implement a recursive function that:
     // 2. for an Object that is not at the root
     //             sets m_worldT and m_worldIT within the scene node
-    //             m_worldT should be set to AB 
+    //             m_worldT should be set to AB
     //             (note that if B is to move in the parent frame, the order of multiplication would be BA)
     //             m_worldIT should be set to the matrix neccessary to properly transform normal vectors
     // 3. Finally traverse the tree making a recursive call to each of the scene nodes children
-    // 
+    //
     //----------------------------------------------------------------------------------
 
     ManipMotionType motion = CurrentManipMotion();
@@ -695,12 +695,12 @@ bool Scene::RotatingManip(void)
     if   ( (RenderMode() == NAVIGATION)
         && (HasManipulator())
         && ((CurrentManipMode() == LOCAL) || (CurrentManipMode() == PARENT))
-        && ((CurrentManipGeometryState() == AXIS_ALL) || 
+        && ((CurrentManipGeometryState() == AXIS_ALL) ||
             (CurrentManipGeometryState() == AXIS_ROTATIONALL))
-        && ((CurrentManipMotion() == ROTATE_X) || 
-            (CurrentManipMotion() == ROTATE_Y) || 
-            (CurrentManipMotion() == ROTATE_Z) || 
-            (CurrentManipMotion() == ROTATE_SCREEN) || 
+        && ((CurrentManipMotion() == ROTATE_X) ||
+            (CurrentManipMotion() == ROTATE_Y) ||
+            (CurrentManipMotion() == ROTATE_Z) ||
+            (CurrentManipMotion() == ROTATE_SCREEN) ||
             (CurrentManipMotion() == ROTATE_DUPLICATE)))
         return(true);
 
@@ -714,12 +714,12 @@ bool Scene::TranslatingManip(void)
     if   ( (RenderMode() == NAVIGATION)
         && (HasManipulator())
         && ((CurrentManipMode() == LOCAL) || (CurrentManipMode() == PARENT))
-        && ((CurrentManipGeometryState() == AXIS_ALL) || 
+        && ((CurrentManipGeometryState() == AXIS_ALL) ||
             (CurrentManipGeometryState() == AXIS_TRANSXYZ))
-        && ((CurrentManipMotion() == TRANS_YZ) || 
-            (CurrentManipMotion() == TRANS_XZ) || 
-            (CurrentManipMotion() == TRANS_XY) || 
-            (CurrentManipMotion() == TRANS_X)  || 
+        && ((CurrentManipMotion() == TRANS_YZ) ||
+            (CurrentManipMotion() == TRANS_XZ) ||
+            (CurrentManipMotion() == TRANS_XY) ||
+            (CurrentManipMotion() == TRANS_X)  ||
             (CurrentManipMotion() == TRANS_Y)  ||
             (CurrentManipMotion() == TRANS_Z)))
         return(true);
@@ -737,25 +737,25 @@ bool Scene::HasManipulator(void)
 bool Scene::SelectManipulator(int mouseX, int mouseY, int width, int height)
 {
 
-    double matModelView[16], matProjection[16]; 
-    int viewport[4]; 
+    double matModelView[16], matProjection[16];
+    int viewport[4];
     double t = 0.0;
     STVector3 closestPt;
     bool bHit = false;
 
-    glGetDoublev(GL_MODELVIEW_MATRIX, matModelView ); 
-    glGetDoublev(GL_PROJECTION_MATRIX, matProjection ); 
-    glGetIntegerv(GL_VIEWPORT, viewport ); 
-    double winX = (double)mouseX; 
-    double winY = viewport[3] - (double)mouseY; 
+    glGetDoublev(GL_MODELVIEW_MATRIX, matModelView );
+    glGetDoublev(GL_PROJECTION_MATRIX, matProjection );
+    glGetIntegerv(GL_VIEWPORT, viewport );
+    double winX = (double)mouseX;
+    double winY = viewport[3] - (double)mouseY;
 
     GLdouble   m_startX, m_startY, m_startZ;
     GLdouble   m_endX,   m_endY,   m_endZ;
 
-    gluUnProject(winX, winY, 0.0, matModelView, matProjection, 
-                 viewport, &m_startX, &m_startY, &m_startZ); 
-    gluUnProject(winX, winY, 1.0, matModelView, matProjection, 
-                 viewport, &m_endX, &m_endY, &m_endZ); 
+    gluUnProject(winX, winY, 0.0, matModelView, matProjection,
+                 viewport, &m_startX, &m_startY, &m_startZ);
+    gluUnProject(winX, winY, 1.0, matModelView, matProjection,
+                 viewport, &m_endX, &m_endY, &m_endZ);
 
     ManipGeom selectedGeom;
     bHit = RayTestManip(STVector3(m_startX, m_startY, m_startZ), STVector3(m_endX, m_endY, m_endZ), &selectedGeom);
@@ -787,30 +787,30 @@ bool Scene::SelectObject(int mouseX, int mouseY, int width, int height, STPoint3
     if(HasManipulator())
         return(false);
 
-    double matModelView[16], matProjection[16]; 
-    int viewport[4]; 
+    double matModelView[16], matProjection[16];
+    int viewport[4];
     double t = 0.0;
     STVector3 closestPt;
     bool bHit = false;
 
-    glGetDoublev(GL_MODELVIEW_MATRIX, matModelView ); 
-    glGetDoublev(GL_PROJECTION_MATRIX, matProjection ); 
-    glGetIntegerv(GL_VIEWPORT, viewport ); 
-    double winX = (double)mouseX; 
-    double winY = viewport[3] - (double)mouseY; 
+    glGetDoublev(GL_MODELVIEW_MATRIX, matModelView );
+    glGetDoublev(GL_PROJECTION_MATRIX, matProjection );
+    glGetIntegerv(GL_VIEWPORT, viewport );
+    double winX = (double)mouseX;
+    double winY = viewport[3] - (double)mouseY;
 
     GLdouble   m_startX, m_startY, m_startZ;
     GLdouble   m_endX,   m_endY,   m_endZ;
 
-    gluUnProject(winX, winY, 0.0, matModelView, matProjection, 
-                 viewport, &m_startX, &m_startY, &m_startZ); 
-    gluUnProject(winX, winY, 1.0, matModelView, matProjection, 
-                 viewport, &m_endX, &m_endY, &m_endZ); 
+    gluUnProject(winX, winY, 0.0, matModelView, matProjection,
+                 viewport, &m_startX, &m_startY, &m_startZ);
+    gluUnProject(winX, winY, 1.0, matModelView, matProjection,
+                 viewport, &m_endX, &m_endY, &m_endZ);
 
     STVector3 center(bspherecenter.x, bspherecenter.y, bspherecenter.z);
 
     bHit = RayTest(center, bsphereradius, center,
-                   STVector3(m_startX, m_startY, m_startZ), 
+                   STVector3(m_startX, m_startY, m_startZ),
                    STVector3(m_endX, m_endY, m_endZ),
                    &closestPt, &t);
 	SetCurrentManipMotion(MANIP_NONE);
@@ -820,13 +820,13 @@ bool Scene::SelectObject(int mouseX, int mouseY, int width, int height, STPoint3
 // Proj3_scenemanip - No implementation required
 // this has been done for you
 // maps the geometry part to the motion
-//    AXIS_ROTX    - ROTATE_X                
-//    AXIS_ROTY    - ROTATE_Y               
-//    AXIS_ROTZ    - ROTATE_Z              
+//    AXIS_ROTX    - ROTATE_X
+//    AXIS_ROTY    - ROTATE_Y
+//    AXIS_ROTZ    - ROTATE_Z
 //
-//   AXIS_TRANSX   - TRANS_X                
-//   AXIS_TRANSY   - TRANS_Y                 
-//   AXIS_TRANSX    - TRANS_Z                 
+//   AXIS_TRANSX   - TRANS_X
+//   AXIS_TRANSY   - TRANS_Y
+//   AXIS_TRANSX    - TRANS_Z
 //
 //   AXIS_ROTSCREEN - ROTATE_SCREEN
 //   AXIS_DUPLICATE - ROTATE_DUPLICATE
@@ -1016,7 +1016,7 @@ void Scene::ViewProjectionScreenSpace(STMatrix4 M)
 {
     // memory for matrix data
     float modelMat_f[16];
-    float projMat_f[16]; 
+    float projMat_f[16];
 
     // matrix data retrieved
     glGetFloatv (GL_MODELVIEW_MATRIX,  modelMat_f);  // model and view matrix combined
@@ -1283,7 +1283,7 @@ void Scene::DrawManipulator(void)
 
     // draw rotation manipulator
     //------------------------------------------------------------------
-    if((CurrentManipGeometryState() == AXIS_ALL) || 
+    if((CurrentManipGeometryState() == AXIS_ALL) ||
         (CurrentManipGeometryState() == AXIS_ROTATIONALL)) {
 
 
@@ -1298,7 +1298,7 @@ void Scene::DrawManipulator(void)
         STVector3 planenorm(GetCamera()->Position() - origin);
         planenorm.Normalize();
         STVector4 camplane = vector4(planenorm,0);
-        
+
         // duplicate
         X_RIGHT   =   right    * ScreenFactor();
         X_UP      =   up       * ScreenFactor();
@@ -1311,9 +1311,9 @@ void Scene::DrawManipulator(void)
         // screen rot
         X_UP_sc    =  up * 1.2f       * ScreenFactor();
         X_RIGHT_sc =  right * 1.2f    * ScreenFactor();
-        if(CurrentManipMotion() == ROTATE_SCREEN) 
+        if(CurrentManipMotion() == ROTATE_SCREEN)
             DrawCircle(origin, colorWhite, X_UP_sc, X_RIGHT_sc);
-        else 
+        else
             DrawCircle(origin, colorWhite, X_UP_sc, X_RIGHT_sc);
            // DrawCircle(origin, colorMagenta, X_UP_sc, X_RIGHT_sc);
 
@@ -1366,7 +1366,7 @@ void Scene::DrawManipulator(void)
 
     // draw translation manupulator
     //-----------------------------------------------
- 
+
     // Translations
     if((CurrentManipGeometryState() == AXIS_ALL) ||
         (CurrentManipGeometryState() == AXIS_TRANSXYZ)) {
@@ -1387,19 +1387,17 @@ void Scene::DrawManipulator(void)
 
 
         // y axis
-        if(CurrentManipMotion() == TRANS_Y) 
+        if(CurrentManipMotion() == TRANS_Y)
             DrawAxis(origin, colorGreen, yaxis, xaxis, zaxis, fct, fct2, colall);
         else
             DrawAxis(origin, colorGreen, yaxis, xaxis, zaxis, fct, fct2, coly);
 
-    
+
         // z axis
-        if(CurrentManipMotion() == TRANS_Z) 
+        if(CurrentManipMotion() == TRANS_Z)
             DrawAxis(origin, colorBlue, zaxis, xaxis, yaxis, fct, fct2, colall);
         else
             DrawAxis(origin, colorBlue, zaxis, xaxis, yaxis, fct, fct2, colz);
     }
 
 }
-
-

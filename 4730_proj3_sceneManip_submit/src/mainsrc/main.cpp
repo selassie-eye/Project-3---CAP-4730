@@ -35,6 +35,7 @@ using namespace std;
 #include "utilities.h"
 #include "STVector4.h"
 #include "Triangle.h"
+#include "STMatrix4.h"  // Added in Project 3
 
 
 
@@ -106,7 +107,7 @@ std::string fragmentShader;
 //------------------------------------------------------
 typedef struct {
   int i1;
-  int i2; 
+  int i2;
   int i3;
 } TriangleIndices;
 
@@ -173,7 +174,7 @@ void CreateYourOwnMesh()
     float rightX  = -leftX;
     float nearZ   = -2.0f;
     float farZ    = -nearZ;
-    
+
     gManualTriangleMesh= new STTriangleMesh();
     for (int i = 0; i < TesselationDepth+1; i++){
         for (int j = 0; j < TesselationDepth+1; j++) {
@@ -208,7 +209,7 @@ void CreateYourOwnMesh()
     gManualTriangleMesh->mShininess=8.0f;
 }
 
-// clean up 
+// clean up
 void CleanUp()
 {
     if(pScene)
@@ -255,23 +256,23 @@ void ProcessRotation(int mouseX, int mouseY)
     if(!pScene->HasManipulator())
         return;
 
-    double matModelView[16], matProjection[16]; 
-    int viewport[4]; 
+    double matModelView[16], matProjection[16];
+    int viewport[4];
 
 
-    glGetDoublev(GL_MODELVIEW_MATRIX, matModelView); 
-    glGetDoublev(GL_PROJECTION_MATRIX, matProjection); 
-    glGetIntegerv(GL_VIEWPORT, viewport ); 
-    double winX = (double)mouseX; 
-    double winY = viewport[3] - (double)mouseY; 
+    glGetDoublev(GL_MODELVIEW_MATRIX, matModelView);
+    glGetDoublev(GL_PROJECTION_MATRIX, matProjection);
+    glGetIntegerv(GL_VIEWPORT, viewport );
+    double winX = (double)mouseX;
+    double winY = viewport[3] - (double)mouseY;
 
     GLdouble   m_startX, m_startY, m_startZ;
     GLdouble   m_endX,   m_endY,   m_endZ;
 
-    gluUnProject(winX, winY, 0.0, matModelView, matProjection, 
-                 viewport, &m_startX, &m_startY, &m_startZ); 
-    gluUnProject(winX, winY, 1.0, matModelView, matProjection, 
-                 viewport, &m_endX, &m_endY, &m_endZ); 
+    gluUnProject(winX, winY, 0.0, matModelView, matProjection,
+                 viewport, &m_startX, &m_startY, &m_startZ);
+    gluUnProject(winX, winY, 1.0, matModelView, matProjection,
+                 viewport, &m_endX, &m_endY, &m_endZ);
 
 
     double t = 0.0;
@@ -286,7 +287,7 @@ void ProcessRotation(int mouseX, int mouseY)
     // Update the matrix transformation for the manipulator geometry
     // Update current model matrix
     // Use this information to call  pScene->Rotate();
-    // 
+    //
     //------------------------------------------------------------------------------
     pScene->Rotate(raystart, raysend);
     //---------------------------------------------------------------------------------
@@ -305,18 +306,18 @@ void ProcessTranslation(int mouseX, int mouseY)
         return;
 
     // declare vars
-    double matModelView[16], matProjection[16]; 
-    int viewport[4]; 
+    double matModelView[16], matProjection[16];
+    int viewport[4];
     double t = 0.0;
     STVector3 closestPt;
     bool bHit = false;
 
     // get the model and projection matrices
-    glGetDoublev(GL_MODELVIEW_MATRIX, matModelView ); 
-    glGetDoublev(GL_PROJECTION_MATRIX, matProjection ); 
-    glGetIntegerv(GL_VIEWPORT, viewport ); 
-    double winX = (double)mouseX; 
-    double winY = viewport[3] - (double)mouseY; 
+    glGetDoublev(GL_MODELVIEW_MATRIX, matModelView );
+    glGetDoublev(GL_PROJECTION_MATRIX, matProjection );
+    glGetIntegerv(GL_VIEWPORT, viewport );
+    double winX = (double)mouseX;
+    double winY = viewport[3] - (double)mouseY;
 
 
     // mouse positions and z coords of near and far plane
@@ -324,16 +325,16 @@ void ProcessTranslation(int mouseX, int mouseY)
     GLdouble   m_endX,   m_endY,   m_endZ;
 
 
-    // Projects the mouse position in window coordinates 
+    // Projects the mouse position in window coordinates
     // into points in world space. The projected points
     // and the near and far planes returned are used to
     // create a ray in the scene along which the object
     // will be tranaslated forward and backward.
-    gluUnProject(winX, winY, 0.0, matModelView, matProjection, 
-                 viewport, &m_startX, &m_startY, &m_startZ); 
-    gluUnProject(winX, winY, 1.0, matModelView, matProjection, 
-                 viewport, &m_endX, &m_endY, &m_endZ); 
-    
+    gluUnProject(winX, winY, 0.0, matModelView, matProjection,
+                 viewport, &m_startX, &m_startY, &m_startZ);
+    gluUnProject(winX, winY, 1.0, matModelView, matProjection,
+                 viewport, &m_endX, &m_endY, &m_endZ);
+
     STVector3 raystart(m_startX, m_startY, m_startZ);
     STVector3 raysend(m_endX, m_endY, m_endZ);
 
@@ -358,7 +359,7 @@ void ProcessTranslation(int mouseX, int mouseY)
 //-----------------------------------------------------------
 void initializeScene(void)
 {
-    
+
 
     //----------------------------------------------------
     // TO DO: Proj3_scenemanip
@@ -377,7 +378,9 @@ void initializeScene(void)
     // TO DO: Proj3_scenemanip for your first test, change the value
     // of the transform that initializes the transformation node below
     // When you propogate the transform to the children the cube should move in the scene
-    TransformNode *pNode =  pScene->AddTransform(IdentityMatrix(), pScene->GetRoot());
+    STMatrix4 newMatrix = new STMatrix4();    // New matrix initialization for Projec 3 pt 1
+    newMatrix->EncodeT(4.f, 4.f, 4.f);
+    TransformNode *pNode =  pScene->AddTransform(newMatrix, pScene->GetRoot());
 
     // add the triangle meshes
     for(int i = 0; i < (int)gTriangleMeshes.size(); ++i) {
@@ -441,7 +444,7 @@ void Setup()
     //--------------------------------------------------------------------
     // TO DO: Proj3_scenemanip
     // No Further implementation required here.
-    // This code resets the camera and then sets it to a position in front of the model 
+    // This code resets the camera and then sets it to a position in front of the model
     // with the  lookat vector pointing toward the model.
     //-----------------------------------------------------------------------
     pScene->GetCamera()->Reset();
@@ -483,7 +486,7 @@ void defaultMode(void)
 
     //------------------------------------------------------------
     // TO DO: Proj3_scenemanip
-    // No new implementation required. 
+    // No new implementation required.
     // This sets the default camera position.
     // for the first view.
     //-------------------------------------------------------------
@@ -512,7 +515,7 @@ void defaultMode(void)
         // No Further implementation required here. The scene
         // is drawn here. A new bounding box is also created around
         // all group nodes. This is required so that a sphere
-        // bounding box can be used for selecting objects 
+        // bounding box can be used for selecting objects
         // (ray sphere intersection). If the bounding box
         // is not up to date and in world space coordinates,
         // Scene::SelectObjects will not work.
@@ -527,11 +530,11 @@ void defaultMode(void)
         shader->SetUniform("colorMapping", 1.0);
     }
 
-    // unbind shares 
+    // unbind shares
     shader->UnBind();
 
-    // done with front frame buffer so swap to 
-    // the back frame buffer that was rendering 
+    // done with front frame buffer so swap to
+    // the back frame buffer that was rendering
     // in the background
     glutSwapBuffers();
 }
@@ -614,7 +617,7 @@ void KeyCallback(unsigned char key, int x, int y)
             // between Fly and Orbit mode
             // 2. Use Camera::ToggleRotationMode
             //------------------------------------------------
-  
+
             pScene->GetCamera()->ToggleRotationMode();
 
             //------------------------------------------------
@@ -634,14 +637,14 @@ void KeyCallback(unsigned char key, int x, int y)
             fprintf(stderr, "toggle manip mode\n");
             pScene->ToggleManipGeometry();
             //------------------------------------------------
-        }   
+        }
         break;
 
         case 'f': {// switch between smooth shading and flat shading
             smooth = !smooth;
         }
         break;
-    
+
 
         case 'k': {
             //------------------------------------------------
@@ -651,7 +654,7 @@ void KeyCallback(unsigned char key, int x, int y)
             //------------------------------------------------
             pScene->ToggleManipMode();
             //------------------------------------------------
-        }   
+        }
         break;
 
 
@@ -659,7 +662,7 @@ void KeyCallback(unsigned char key, int x, int y)
             pScene->GetCamera()->Reset();
         }
         break;
-    
+
 
         case 's': {
                 //
@@ -686,7 +689,7 @@ void KeyCallback(unsigned char key, int x, int y)
             pScene->GetCamera()->ResetUp();
         }
         break;
-    
+
         case 'w': {
        }
        break;
@@ -717,11 +720,11 @@ void MouseCallback(int button, int state, int x, int y)
         || button == GLUT_RIGHT_BUTTON
         || button == GLUT_MIDDLE_BUTTON){
         gMouseButton = button;
-    } 
+    }
     else {
         gMouseButton = -1;
     }
-    
+
     if (state == GLUT_UP)
     {
         gPreviousMouseX = -1;
@@ -733,8 +736,8 @@ void MouseCallback(int button, int state, int x, int y)
       && (pScene->GetRenderMode() == NAVIGATION)
       && (pScene->CurrentManipMode() == LOCAL || pScene->CurrentManipMode() == PARENT)) {
 
-                     
-          
+
+
          if(pScene->HasManipulator())
             fprintf(stderr, "has manip!\n");
          else
@@ -745,7 +748,7 @@ void MouseCallback(int button, int state, int x, int y)
         // No new implementation required. This is implemented for you.
         // If there is a manupulator in the scene, shoot a ray from the
         // mouse position in screen coordinates to the the 3D geometry in
-        // world space to see if it hits the manipulator. If there is a hit, make the 
+        // world space to see if it hits the manipulator. If there is a hit, make the
         // selected  part active, set the manipulation motion mode and return.
          //---------------------------------------------------------------------------
         if(pScene->HasManipulator()) {
@@ -772,7 +775,7 @@ void MouseCallback(int button, int state, int x, int y)
         if(pScene->SelectObject(x, y, gWindowSizeX, gWindowSizeY, center, radius)) {
             fprintf(stderr, "SELECTED!\n");
 
-            if(!pScene->HasManipulator()) 
+            if(!pScene->HasManipulator())
                 pScene->AddManipulator();
         }
         else {
@@ -807,7 +810,7 @@ void MouseMotionCallback(int x, int y)
         ProcessTranslation(x, y);
         return;
     }
-    
+
     // rotate
     if (pScene->CurrentManipMotion() == ROTATE_X ||
         pScene->CurrentManipMotion() == ROTATE_Y ||
@@ -825,9 +828,9 @@ void MouseMotionCallback(int x, int y)
         float deltaY = y-gPreviousMouseY;
         gPreviousMouseX = x;
         gPreviousMouseY = y;
-        
 
-        
+
+
         if (gMouseButton == GLUT_LEFT_BUTTON)
         {
             //-----------------------------------------------------------
@@ -848,13 +851,13 @@ void MouseMotionCallback(int x, int y)
         {
            pScene->GetCamera()->Zoom(deltaY);
         }
-        
-    } 
+
+    }
     else {
         gPreviousMouseX = x;
         gPreviousMouseY = y;
     }
-    
+
 }
 
 
@@ -867,10 +870,10 @@ void menu(int item)
 {
     //------------------------------------------------------------------------------------
     // TO DO: Proj3_scenemanip
-    // "Optional" 
+    // "Optional"
     // On third mouse button down, CreateContextMenu()
     // alows you to add a context menu
-    // The menu toggles modes 
+    // The menu toggles modes
     // implement this menu() function to complete this
     // This is an optional assignment and not required for grading
     //-------------------------------------------------------------------------------------
@@ -897,10 +900,10 @@ void usage()
 
 //------------------------------------------------------------------------------------
 // TO DO: Proj3_scenemanip
-// "Optional" 
-// On third mouse button down, this function 
+// "Optional"
+// On third mouse button down, this function
 // alows you to add a context menu
-// The menu toggles modes 
+// The menu toggles modes
 // implement the menu() function to complete this
 // This is an optional  and not required for grading
 //-------------------------------------------------------------------------------------
@@ -981,8 +984,8 @@ int main(int argc, char** argv)
 
     // run the main glut loop
     glutMainLoop();
-  
-  
+
+
     // Cleanup code should be called here.
     CleanUp();
 
