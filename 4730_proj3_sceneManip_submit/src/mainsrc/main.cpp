@@ -380,7 +380,7 @@ void initializeScene(void)
     // When you propogate the transform to the children the cube should move in the scene
     STMatrix4 *newMatrix = new STMatrix4();    // New matrix initialization for Projec 3 pt 1
     newMatrix->EncodeT(4.f, 4.f, 4.f);
-    TransformNode *pNode =  pScene->AddTransform(newMatrix, pScene->GetRoot());
+    TransformNode *pNode =  pScene->AddTransform(&newMatrix, pScene->GetRoot());
 
     // add the triangle meshes
     for(int i = 0; i < (int)gTriangleMeshes.size(); ++i) {
