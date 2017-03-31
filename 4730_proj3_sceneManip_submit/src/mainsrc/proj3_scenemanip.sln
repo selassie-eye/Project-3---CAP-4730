@@ -1,0 +1,34 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libst", "..\libst\vc2008\libst.vcxproj", "{7FD037CD-7D78-4096-A827-0A7E6642FF74}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "librt", "..\librt\rtlib.vcxproj", "{BAC11F41-C2AC-4AD6-B534-2593B5AB65C3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "proj3_scenemanip", "proj3_scenemanip.vcxproj", "{E7D53387-8C9A-4549-AA28-F7D01195A42C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FD037CD-7D78-4096-A827-0A7E6642FF74}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7FD037CD-7D78-4096-A827-0A7E6642FF74}.Debug|Win32.Build.0 = Debug|Win32
+		{7FD037CD-7D78-4096-A827-0A7E6642FF74}.Release|Win32.ActiveCfg = Release|Win32
+		{7FD037CD-7D78-4096-A827-0A7E6642FF74}.Release|Win32.Build.0 = Release|Win32
+		{BAC11F41-C2AC-4AD6-B534-2593B5AB65C3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BAC11F41-C2AC-4AD6-B534-2593B5AB65C3}.Debug|Win32.Build.0 = Debug|Win32
+		{BAC11F41-C2AC-4AD6-B534-2593B5AB65C3}.Release|Win32.ActiveCfg = Release|Win32
+		{BAC11F41-C2AC-4AD6-B534-2593B5AB65C3}.Release|Win32.Build.0 = Release|Win32
+		{E7D53387-8C9A-4549-AA28-F7D01195A42C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E7D53387-8C9A-4549-AA28-F7D01195A42C}.Debug|Win32.Build.0 = Debug|Win32
+		{E7D53387-8C9A-4549-AA28-F7D01195A42C}.Release|Win32.ActiveCfg = Release|Win32
+		{E7D53387-8C9A-4549-AA28-F7D01195A42C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+EndGlobal

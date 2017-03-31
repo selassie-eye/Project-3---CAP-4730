@@ -1,0 +1,79 @@
+﻿Build started 3/7/2017 7:20:19 PM.
+     1>Project "C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\libst\vc2008\libst.vcxproj" on node 2 (Rebuild target(s)).
+       Project file contains ToolsVersion="12.0". This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion="4.0". For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
+     1>_PrepareForClean:
+         Deleting file "Debug\libst.lastbuildstate".
+       InitializeBuildStatus:
+         Creating "Debug\libst.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I../include /I../ext/libpng/include /I../ext/libjpeg/include /I../ext/zlib/include/ /I../ext/freetype/include /I../ext/glew/include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WIN32 /D _DEBUG /D _LIB /D _CRT_SECURE_NO_WARNINGS /D _CRT_SECURE_NO_DEPRECATE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\STColor3f.cpp ..\STColor4f.cpp ..\STColor4ub.cpp ..\STFont.cpp ..\STImage.cpp ..\STImage_jpeg.cpp ..\STImage_png.cpp ..\STImage_ppm.cpp ..\STJoystick.cpp ..\STJoystick_win32.cpp ..\STPoint2.cpp ..\STPoint3.cpp ..\STShaderProgram.cpp ..\STShape.cpp ..\STTexture.cpp ..\STTimer.cpp ..\STTriangleMesh.cpp ..\STVector2.cpp ..\STVector3.cpp ..\STVector4.cpp ..\tiny_obj_loader.cpp
+         tiny_obj_loader.cpp
+         STVector4.cpp
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\libst\include\stmatrix4.inl(271): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         STVector3.cpp
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\libst\include\stmatrix4.inl(271): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         STVector2.cpp
+         STTriangleMesh.cpp
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\libst\include\stmatrix4.inl(271): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\libst\sttrianglemesh.cpp(358): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         STTimer.cpp
+         STTexture.cpp
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\libst\include\stmatrix4.inl(271): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         STShape.cpp
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\libst\include\stmatrix4.inl(271): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         STShaderProgram.cpp
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\libst\include\stmatrix4.inl(271): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         STPoint3.cpp
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\libst\include\stmatrix4.inl(271): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         STPoint2.cpp
+         STJoystick_win32.cpp
+         STJoystick.cpp
+         STImage_ppm.cpp
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\libst\include\stmatrix4.inl(271): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         STImage_png.cpp
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\libst\include\stmatrix4.inl(271): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         STImage_jpeg.cpp
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\libst\include\stmatrix4.inl(271): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         STImage.cpp
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\libst\include\stmatrix4.inl(271): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         STFont.cpp
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\libst\include\stmatrix4.inl(271): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         STColor4ub.cpp
+         STColor4f.cpp
+         Generating Code...
+         Compiling...
+         STColor3f.cpp
+         Generating Code...
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppBuild.targets(1299,5): warning MSB8012: TargetPath(C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\libst\vc2008\../lib\libst.lib) does not match the Library's OutputFile property value (C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\libst\lib\Debug\libst.lib). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Lib.OutputFile).
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\Lib.exe /OUT:"../lib\Debug/libst.lib" /NOLOGO Debug\STColor3f.obj
+         Debug\STColor4f.obj
+         Debug\STColor4ub.obj
+         Debug\STFont.obj
+         Debug\STImage.obj
+         Debug\STImage_jpeg.obj
+         Debug\STImage_png.obj
+         Debug\STImage_ppm.obj
+         Debug\STJoystick.obj
+         Debug\STJoystick_win32.obj
+         Debug\STPoint2.obj
+         Debug\STPoint3.obj
+         Debug\STShaderProgram.obj
+         Debug\STShape.obj
+         Debug\STTexture.obj
+         Debug\STTimer.obj
+         Debug\STTriangleMesh.obj
+         Debug\STVector2.obj
+         Debug\STVector3.obj
+         Debug\STVector4.obj
+         Debug\tiny_obj_loader.obj
+     1>STVector4.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+         libst.vcxproj -> C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\libst\vc2008\../lib\libst.lib
+       FinalizeBuildStatus:
+         Deleting file "Debug\libst.unsuccessfulbuild".
+         Touching "Debug\libst.lastbuildstate".
+     1>Done Building Project "C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\libst\vc2008\libst.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:16.97

@@ -1,0 +1,48 @@
+﻿Build started 3/7/2017 7:20:36 PM.
+     1>Project "C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\mainsrc\proj3_scenemanip.vcxproj" on node 2 (Rebuild target(s)).
+       Project file contains ToolsVersion="12.0". This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion="4.0". For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
+     1>_PrepareForClean:
+         Deleting file "Debug\proj3_scenemanip.lastbuildstate".
+     1>Project "C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\mainsrc\proj3_scenemanip.vcxproj" (1) is building "C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\libst\vc2008\libst.vcxproj" (2) on node 2 (GetTargetPath target(s)).
+       Project file contains ToolsVersion="12.0". This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion="4.0". For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
+     2>Done Building Project "C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\libst\vc2008\libst.vcxproj" (GetTargetPath target(s)).
+     1>Project "C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\mainsrc\proj3_scenemanip.vcxproj" (1) is building "C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\libst\vc2008\libst.vcxproj" (2:2) on node 2 (GetNativeManifest target(s)).
+       Project file contains ToolsVersion="12.0". This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion="4.0". For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
+     2>Done Building Project "C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\libst\vc2008\libst.vcxproj" (GetNativeManifest target(s)).
+     1>InitializeBuildStatus:
+         Touching "Debug\proj3_scenemanip.unsuccessfulbuild".
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /IC:\cygwin\home\Corey\environmentmap\proj2_raytracer\src\include /IC:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\mainsrc\/../libst/include /IC:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\mainsrc\/../libst/ext/glew/include /IC:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\mainsrc\/include /IC:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\mainsrc\..\librt\include /I"..\src\libigl\libigl-master\include" /I..\src\libst\ext\glew\include\GL /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _CRT_SECURE_NO_WARNINGS /D NOMINMAX /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\mainsrc\stglew.h(22): warning C4005: 'GLEW_STATIC' : macro redefinition
+                 c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\mainsrc\main.cpp(22) : see previous definition of 'GLEW_STATIC'
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\libst\include\stmatrix4.inl(271): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\mainsrc\main.cpp(165): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\mainsrc\main.cpp(280): warning C4244: 'argument' : conversion from 'GLdouble' to 'float', possible loss of data
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\mainsrc\main.cpp(281): warning C4244: 'argument' : conversion from 'GLdouble' to 'float', possible loss of data
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\mainsrc\main.cpp(337): warning C4244: 'argument' : conversion from 'GLdouble' to 'float', possible loss of data
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\mainsrc\main.cpp(338): warning C4244: 'argument' : conversion from 'GLdouble' to 'float', possible loss of data
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\mainsrc\main.cpp(824): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\mainsrc\main.cpp(825): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\mainsrc\main.cpp(840): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\uf_teaching\cap4730\prog\proj3\4730_proj3_scenemanip_submit\src\mainsrc\main.cpp(880): warning C4065: switch statement contains 'default' but no 'case' labels
+     1>Project "C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\mainsrc\proj3_scenemanip.vcxproj" (1) is building "C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\libst\vc2008\libst.vcxproj" (2:3) on node 2 (GetResolvedLinkLibs target(s)).
+       Project file contains ToolsVersion="12.0". This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion="4.0". For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
+     2>Done Building Project "C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\libst\vc2008\libst.vcxproj" (GetResolvedLinkLibs target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\mainsrc\Debug\proj3_scenemanip.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:../libst/lib/Debug/ /LIBPATH:../libst/ext/vc2008/lib/Debug/ /LIBPATH:..\lib /LIBPATH:../libst/lib/Debug /LIBPATH:../librt/lib/Debug glut32.lib libpng.lib jpeg.lib zlib.lib freetype231.lib glew.lib librt.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\mainsrc\Debug\proj3_scenemanip.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\mainsrc\Debug\proj3_scenemanip.lib" /MACHINE:X86 /SAFESEH Debug\main.obj
+         C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\libst\lib\Debug\libst.lib
+     1>main.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
+     1>LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+     1>LINK : warning LNK4098: defaultlib 'LIBCMTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+     1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'msvcrt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
+     1>glew.lib(glew.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glew.lib(glew.obj)' or at 'C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\mainsrc\Debug\vc100.pdb'; linking object as if no debug info
+         proj3_scenemanip.vcxproj -> C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\mainsrc\Debug\proj3_scenemanip.exe
+       FinalizeBuildStatus:
+         Deleting file "Debug\proj3_scenemanip.unsuccessfulbuild".
+         Touching "Debug\proj3_scenemanip.lastbuildstate".
+     1>Done Building Project "C:\UF_Teaching\CAP4730\prog\proj3\4730_proj3_sceneManip_submit\src\mainsrc\proj3_scenemanip.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.27
