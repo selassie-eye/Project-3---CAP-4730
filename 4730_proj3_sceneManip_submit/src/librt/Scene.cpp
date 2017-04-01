@@ -673,6 +673,8 @@ void Scene::PropogateTransforms(TransformNode *pNode)
         STMatrix4 *worldmatrix = m_geometryList[i]->GetWorldT();
         if(true)
             worldmatrix->Multiply(*transform);
+            std::vector<SceneNode*> children = m_geometryList[i]->GetChildren;
+            for (SceneNode *node : children) PropogateTransforms(node);
         else if(IsRotation(motion))
             worldmatrix->Multiply(m_rotation);
     }
