@@ -674,7 +674,7 @@ void Scene::PropogateTransforms(TransformNode *pNode)
         worldmatrix->Multiply(*transform);
       /*  if(IsTranslation(motion))
             worldmatrix->Multiply(*transform); */
-        else if(IsRotation(motion))
+        /*else*/ if(IsRotation(motion))
             worldmatrix->Multiply(m_rotation);
     }
 }
