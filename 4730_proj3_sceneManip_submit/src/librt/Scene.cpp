@@ -656,7 +656,7 @@ void Scene::PropogateTransforms(SceneNode *pNode)
     ManipMotionType motion = CurrentManipMotion();
     for(int i = 0; i < (int)m_geometryList.size(); ++i) {
         STMatrix4 *worldmatrix = m_geometryList[i]->GetWorldT();
-        if(true)
+        if(IsTranslation(motion))
             worldmatrix->Multiply(m_trans);
         else if(IsRotation(motion))
             worldmatrix->Multiply(m_rotation);
@@ -671,7 +671,7 @@ void Scene::PropogateTransforms(TransformNode *pNode)
     STMatrix4 *transform = pNode->GetTransform();
     for(int i = 0; i < (int)m_geometryList.size(); ++i) {
         STMatrix4 *worldmatrix = m_geometryList[i]->GetWorldT();
-        if(IsTranslation(motion))
+        if(true)
             worldmatrix->Multiply(*transform);
         else if(IsRotation(motion))
             worldmatrix->Multiply(m_rotation);
