@@ -656,8 +656,11 @@ void Scene::PropogateTransforms(SceneNode *pNode)
     ManipMotionType motion = CurrentManipMotion();
     for(int i = 0; i < (int)m_geometryList.size(); ++i) {
         STMatrix4 *worldmatrix = m_geometryList[i]->GetWorldT();
-        if(IsTranslation(motion))
+        if(IsTranslation(motion)){
             worldmatrix->Multiply(m_trans);
+            std::vector<SceneNode*> children = m_geometryList[i]->GetChildren();
+            for (SceneNode *node : children) PropogateTransforms(node);
+          }
         else if(IsRotation(motion))
             worldmatrix->Multiply(m_rotation);
     }
@@ -669,12 +672,15 @@ void Scene::PropogateTransforms(TransformNode *pNode)
 {
     ManipMotionType motion = CurrentManipMotion();
     STMatrix4 *transform = pNode->GetTransform();
+    STMatrix4 *nTransform = transform;
+    nTransform->inv();
+    nTransform->transpose();
     for(int i = 0; i < (int)m_geometryList.size(); ++i) {
         STMatrix4 *worldmatrix = m_geometryList[i]->GetWorldT();
+        STMatrix4 *Iworldmatrix = m_geometryList[i]->GetWorldIT();
         if(true){
             worldmatrix->Multiply(*transform);
-            std::vector<SceneNode*> children = m_geometryList[i]->GetChildren();
-            for (SceneNode *node : children) PropogateTransforms(node);
+            Iworldmatrix->Multiply(*nTransform);
           }
         else if(IsRotation(motion))
             worldmatrix->Multiply(m_rotation);
