@@ -660,10 +660,10 @@ void Scene::PropogateTransforms(SceneNode *pNode)
     STMatrix4 *B = pNode->GetTransform();
 
     STMatrix4 *worldT;
-    worldT->Multiply(A, B);
+    worldT->Multiply(*A, *B);
     STMatrix4 *BPrime = B->inv();
     STMatrix4 *worldIT;
-    worldIT->Multiply(A, BPrime);
+    worldIT->Multiply(*A, *BPrime);
     worldIT->transpose();
 
     pNode->SetWorldT(*worldT);
