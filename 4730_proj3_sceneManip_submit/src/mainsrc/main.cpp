@@ -381,7 +381,6 @@ void initializeScene(void)
     STMatrix4 *translation = new STMatrix4();    // New matrix initialization for Projec 3 pt 1
     translation->EncodeT(1.f, 8.f, 5.f);
     TransformNode *pNode =  pScene->AddTransform(*translation, pScene->GetRoot());
-    pScene->PropogateTransforms(pScene->GetRoot());
 
     // add the triangle meshes
     for(int i = 0; i < (int)gTriangleMeshes.size(); ++i) {
@@ -392,6 +391,7 @@ void initializeScene(void)
     pScene->GetBBox(&gMassCenter, &gBoundingBox);
 
     cout << "Adding nodes done" << endl;
+    pScene->PropogateTransforms(pScene->GetRoot());
     //----------------------------------------------------------------------------
 }
 
