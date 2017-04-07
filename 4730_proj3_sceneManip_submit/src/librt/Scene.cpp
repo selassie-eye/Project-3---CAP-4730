@@ -654,7 +654,7 @@ void Scene::PropogateTransforms(SceneNode *pNode)
     //----------------------------------------------------------------------------------
 
     ManipMotionType motion = CurrentManipMotion();
-    sceneNode *parent = pNode->GetParent();
+    SceneNode *parent = pNode->GetParent();
     if(parent == NULL){ parent = pNode; }
     STMatrix4 *A = parent->GetWorldT();
     STMatrix4 *B = pNode->GetTransform();
