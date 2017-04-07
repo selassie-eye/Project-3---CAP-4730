@@ -75,8 +75,6 @@ public:
     void                        Spin                                        (float QMat1[4], float QMat2[4], float QMat3[4]);
 
     void                        PropogateTransforms                         (SceneNode *pNode);
-    void                        PropogateTransforms                         (TransformNode *pNode); // Overloading for Project 3
-
 
     STVector3                   GetLightPosition                            (void);
 
