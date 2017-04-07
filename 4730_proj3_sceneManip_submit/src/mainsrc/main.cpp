@@ -386,12 +386,12 @@ void initializeScene(void)
     for(int i = 0; i < (int)gTriangleMeshes.size(); ++i) {
         pScene->AddTriangleMesh(gTriangleMeshes[i], (SceneNode*)pNode);
     }
+    pScene->PropogateTransforms(pScene->GetRoot());
 
     // update the bounding box
     pScene->GetBBox(&gMassCenter, &gBoundingBox);
 
     cout << "Adding nodes done" << endl;
-    pScene->PropogateTransforms(pScene->GetRoot());
     //----------------------------------------------------------------------------
 }
 
