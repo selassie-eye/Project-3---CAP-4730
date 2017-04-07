@@ -679,8 +679,10 @@ void Scene::PropogateTransforms(SceneNode *pNode)
             worldmatrix->Multiply(m_rotation);
     }
 
+/*
     std::vector<SceneNode*> children = pNode->GetChildren();
     for (SceneNode *node : children) PropogateTransforms(node);
+*/
     //---------------------------------------------------------------------------------
 
 }
