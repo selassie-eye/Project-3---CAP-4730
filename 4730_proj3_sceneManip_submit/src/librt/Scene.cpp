@@ -664,8 +664,8 @@ void Scene::PropogateTransforms(SceneNode *pNode)
     STMatrix4 *worldIT = A*BPrime;
     worldIT->transpose();
 
-    pNode->SetWorldT(worldT);
-    pNode->SetWorldIT(worldIT);
+    pNode->SetWorldT(&worldT);
+    pNode->SetWorldIT(&worldIT);
 
     std::vector<SceneNode*> children = pNode->GetChildren();
     for (SceneNode *node : children) PropogateTransforms(node);
